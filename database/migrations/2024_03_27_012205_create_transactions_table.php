@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('numero_compte_sender');
-            $table->foreign('numero_compte_sender')->references('numero_compte')->on('comptes');
-            $table->unsignedBigInteger('numero_compte_receiver');
-            $table->foreign('numero_compte_receiver')->references('numero_compte')->on('comptes');
-            $table->double('montant');
+        $table->uuid('numero_compte_sender'); 
+        $table->foreign('numero_compte_sender')->references('numero_compte')->on('comptes');
+        $table->uuid('numero_compte_receiver'); 
+        $table->foreign('numero_compte_receiver')->references('numero_compte')->on('comptes');
+        $table->double('montant');
 
-            $table->timestamps();
+        $table->timestamps();
         });
     }
 

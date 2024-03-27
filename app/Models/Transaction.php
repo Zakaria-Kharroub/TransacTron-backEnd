@@ -16,7 +16,7 @@ class Transaction extends Model
     ];
 
     public function compteSender(){
-        return $this->belongsTo(Compte::class, 'numero_compte_sender');
+        return $this->belongsTo(Compte::class,'numero_compte_sender');
     }
 
     public function compteReceiver(){

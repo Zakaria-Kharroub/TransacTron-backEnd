@@ -22,6 +22,6 @@ class Compte extends Model
     }
 
     public function transactions(){
-        return $this->hasMany(Transaction::class, 'numero_compte_sender');
+        return $this->hasMany(Transaction::class, 'numero_compte_sender', 'numero_compte_receiver');
     }
 }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('comptes', function (Blueprint $table) {
             $table->id();
-            $table->uuid('numero_compte');
+            $table->uuid('numero_compte')->unique();
             $table->decimal('solde', 8, 2);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
