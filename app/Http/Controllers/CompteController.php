@@ -43,4 +43,39 @@ class CompteController extends Controller
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+
+
+    public function searchCompte($name){
+        try {
+           $user = User::where('name', $name)->first();
+    
+            if (!$user) {
+                return response()->json([
+                    'message' => 'user not found',
+               ], Response::HTTP_NOT_FOUND);
+            }
+    
+             $compte = Compte::where('user_id', $user->id)->first();
+    
+            if (!$compte) {
+                return response()->json([
+                  'message' => 'de user avez pas compte',
+                ], Response::HTTP_NOT_FOUND);
+            }
+    
+            return response()->json([
+                'name'=> $user->name,
+                'numero_compte' => $compte->numero_compte,
+                
+            ], Response::HTTP_OK);
+
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'error de recherche: ' . $e->getMessage(),
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    
 }

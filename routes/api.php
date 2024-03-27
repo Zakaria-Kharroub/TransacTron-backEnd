@@ -21,6 +21,7 @@ Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanct
 
 
 Route::post('createcompte',[CompteController::class,'createCompte']);
+Route::get('searchcompte/{name}',[CompteController::class,'searchCompte'])->name('searchcompte');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
