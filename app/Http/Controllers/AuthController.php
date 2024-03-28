@@ -44,9 +44,9 @@ class AuthController extends Controller
         required=true,
         @OA\JsonContent(
             required={"name","email","password"},
-            @OA\Property(property="name", type="string", format="text", example="John Doe"),
-            @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
-            @OA\Property(property="password", type="string", format="password", example="Passw0rd"),
+            @OA\Property(property="name", type="string", format="text", example="zakaria "),
+            @OA\Property(property="email", type="string", format="email", example="zakaria@gmail.com"),
+            @OA\Property(property="password", type="string", format="password", example="zakaria123"),
         )
     ),
      *     @OA\Response(

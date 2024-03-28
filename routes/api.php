@@ -18,18 +18,15 @@ use App\Http\Controllers\TransactionController;
 */
 Route::post('register',[AuthController::class,'register']);
 Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('createcompte',[CompteController::class,'createCompte'])->name('createcompte');
+    Route::get('historique/{numero_compte}',[CompteController::class,'compteHistorique'])->name('historique');
+    Route::post('createtransaction',[TransactionController::class,'createTransaction'])->name('createtransaction');
+});
 
-Route::post('createcompte',[CompteController::class,'createCompte'])->name('createcompte')->middleware('auth:sanctum');
 Route::get('searchcompte/{name}',[CompteController::class,'searchCompte'])->name('searchcompte');
-// historique d'un compte
-Route::get('historique/{numero_compte}',[CompteController::class,'compteHistorique'])->name('historique')->middleware('auth:sanctum');
-
-
-// transaction
-Route::post('createtransaction',[TransactionController::class,'createTransaction'])->name('createtransaction')->middleware('auth:sanctum');
-
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
