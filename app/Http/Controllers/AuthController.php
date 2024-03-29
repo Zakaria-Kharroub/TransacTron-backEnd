@@ -60,7 +60,7 @@ class AuthController extends Controller
      *         response=400,
      *         description="Bad request",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="User registration failed"),
+     *             @OA\Property(property="message", type="string", example="user registration failed"),
      *             @OA\Property(property="error", type="string", example="Error message")
      *         )
      *     )

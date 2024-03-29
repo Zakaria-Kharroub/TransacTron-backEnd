@@ -21,25 +21,25 @@ class CompteController extends Controller
             $existingCompte = Compte::where('user_id', Auth()->user()->id)
                         ->where('type', $request->type)
                         ->first();
-if ($existingCompte) {
-    return response()->json([
-        'message' => 'utilisateur possed deja compte de ce type',
-    ], Response::HTTP_CONFLICT);
-}
+        if ($existingCompte) {
+            return response()->json([
+                'message' =>'utilisateur possed deja compte de ce type',
+            ], Response::HTTP_CONFLICT);
+        }
     
-            $compte = new Compte();
-            $compte->numero_compte = rand(1000000000, 9999999999); 
-            $compte->solde = $request->solde;
-            $compte->user_id = Auth()->user()->id;
-            $compte->type = $request->type;
-            $compte->save();
+            $compte= new Compte();
+            $compte ->numero_compte = rand(1000000000, 9999999999); 
+            $compte-> solde =$request->solde;
+            $compte ->user_id= Auth()->user()->id;
+            $compte ->type =$request->type;
+            $compte -> save();
     
             return response()->json([
-                'message' => 'compte created successfully',
+                'message' => 'compte created successfuly',
             ], Response::HTTP_CREATED);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'error de creation de compte: ' . $e->getMessage(),
+                'message'=> 'error de creation de compte: ' . $e->getMessage(),
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -47,8 +47,7 @@ if ($existingCompte) {
 
     public function searchCompte($name){
         try {
-           $user = User::where('name', $name)->first();
-    
+           $user= User::where('name', $name)->first();
             if (!$user) {
                 return response()->json([
                     'message' => 'user not found',
@@ -59,15 +58,15 @@ if ($existingCompte) {
     
             if ($comptes->isEmpty()) {
                 return response()->json([
-                  'message' => 'de user avez pas compte',
+                  'message' => 'ce user avez pas compte',
                 ], Response::HTTP_NOT_FOUND);
             }
     
             $comptesArray = $comptes->map(function ($compte) use ($user) {
                 return [
-                    'name' => $user->name,
-                    'numero_compte' => $compte->numero_compte,
-                    'type' => $compte->type,
+                    'name' =>$user->name,
+                    'numero_compte'=> $compte->numero_compte,
+                    'type'=> $compte->type,
                 ];
             });
     
@@ -99,14 +98,13 @@ if ($existingCompte) {
     
     
             return response()->json([
-                'transactions' => $transactions,
+              'transactions' => $transactions,
             ], Response::HTTP_OK);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'error de recherche: ' . $e->getMessage(),
+             'message' => 'error de recherche: ' . $e->getMessage(),
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
-
     
 }
